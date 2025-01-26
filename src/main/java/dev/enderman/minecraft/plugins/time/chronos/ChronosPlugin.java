@@ -1,8 +1,8 @@
-package net.slqmy.chronos;
+package dev.enderman.minecraft.plugins.time.chronos;
 
-import net.slqmy.chronos.listener.ChunkLoadListener;
-import net.slqmy.chronos.listener.ChunkUnloadListener;
-import net.slqmy.chronos.manager.ChunkTimeManager;
+import dev.enderman.minecraft.plugins.time.chronos.listener.ChunkLoadListener;
+import dev.enderman.minecraft.plugins.time.chronos.listener.ChunkUnloadListener;
+import dev.enderman.minecraft.plugins.time.chronos.manager.ChunkTimeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;

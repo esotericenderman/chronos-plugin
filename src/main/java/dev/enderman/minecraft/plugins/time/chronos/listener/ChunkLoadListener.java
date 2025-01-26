@@ -1,7 +1,7 @@
-package net.slqmy.chronos.listener;
+package dev.enderman.minecraft.plugins.time.chronos.listener;
 
-import net.slqmy.chronos.ChronosPlugin;
-import net.slqmy.chronos.manager.ChunkTimeManager;
+import dev.enderman.minecraft.plugins.time.chronos.ChronosPlugin;
+import dev.enderman.minecraft.plugins.time.chronos.manager.ChunkTimeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;

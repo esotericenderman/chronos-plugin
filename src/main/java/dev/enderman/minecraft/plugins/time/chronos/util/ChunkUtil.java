@@ -1,4 +1,4 @@
-package net.slqmy.chronos.util;
+package dev.enderman.minecraft.plugins.time.chronos.util;
 
 import org.bukkit.Chunk;
 import org.bukkit.block.Block;

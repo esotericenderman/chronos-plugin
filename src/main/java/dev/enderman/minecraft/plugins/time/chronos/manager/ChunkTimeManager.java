@@ -1,8 +1,8 @@
-package net.slqmy.chronos.manager;
+package dev.enderman.minecraft.plugins.time.chronos.manager;
 
-import net.slqmy.chronos.ChronosPlugin;
-import net.slqmy.chronos.enums.PassedTimeCalculationMode;
-import net.slqmy.chronos.util.ChunkUtil;
+import dev.enderman.minecraft.plugins.time.chronos.ChronosPlugin;
+import dev.enderman.minecraft.plugins.time.chronos.enums.PassedTimeCalculationMode;
+import dev.enderman.minecraft.plugins.time.chronos.util.ChunkUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
