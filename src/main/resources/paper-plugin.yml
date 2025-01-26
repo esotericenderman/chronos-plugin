@@ -1,4 +1,0 @@
-name: chronos
-version: '${version}'
-main: dev.enderman.minecraft.plugins.time.chronos.ChronosPlugin
-api-version: '1.20'

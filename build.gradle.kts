@@ -1,69 +1,89 @@
+import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+
 plugins {
     java
-    application
+    `java-library`
 
-    id("io.papermc.paperweight.userdev") version "1.5.5"
+    `maven-publish`
+
+    id("io.papermc.paperweight.userdev") version "1.7.3"
+    id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.2.0"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.github.goooler.shadow") version "8.1.8"
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
+description = "A plugin that makes the passing of time more accurate."
 
 group = "dev.enderman"
-version = "1.0-SNAPSHOT"
-description = "A plugin that makes the passing of time more accurate."
+version = "0.0.1"
+
+val projectGroupString = group.toString()
+val projectVersionString = version.toString()
+
+val javaVersion = 21
+val javaVersionEnumMember = JavaVersion.valueOf("VERSION_$javaVersion")
+
+val paperApiMinecraftVersion = "1.21.1"
+val paperApiVersion = "$paperApiMinecraftVersion-R0.1-SNAPSHOT"
+
+java {
+    sourceCompatibility = javaVersionEnumMember
+    targetCompatibility = javaVersionEnumMember
+
+    toolchain.languageVersion.set(JavaLanguageVersion.of(javaVersion))
+}
 
 repositories {
     mavenCentral()
-
-    mavenLocal()
-
-    maven("https://repo.papermc.io/repository/maven-public/")
-
-    maven("https://oss.sonatype.org/content/groups/public/")
+    maven("https://www.jitpack.io")
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-    paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle(paperApiVersion)
+
+    implementation("dev.jorel", "commandapi-bukkit-shade-mojang-mapped", "9.5.3")
+    implementation("net.lingala.zip4j", "zip4j", "2.11.5")
 }
 
 tasks {
+    build {
+        dependsOn(shadowJar)
+    }
+
     compileJava {
-        options.encoding = Charsets.UTF_8.name()
-        options.release.set(17)
+        options.release.set(javaVersion)
     }
 
     javadoc {
         options.encoding = Charsets.UTF_8.name()
     }
+}
 
-    processResources {
-        filteringCharset = Charsets.UTF_8.name()
+bukkitPluginYaml {
+    name = "Chronos"
+    description = project.description
 
-        val props = mapOf(
-                "name" to project.name,
-                "version" to project.version,
-                "description" to project.description,
-                "apiVersion" to "1.20"
-        )
+    authors = listOfNotNull("Esoteric Enderman")
 
-        inputs.properties(props)
+    setVersion(project.version)
 
-        filesMatching("plugin.yml") {
-            expand(props)
+    apiVersion = paperApiMinecraftVersion
+    main = "${project.group}.minecraft.plugins.time.chronos.ChronosPlugin"
+
+    load = BukkitPluginYaml.PluginLoadOrder.STARTUP
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = projectGroupString
+            artifactId = rootProject.name
+            version = projectVersionString
         }
-    }
-
-    assemble {
-        dependsOn(reobfJar)
-    }
-
-    assemble {
-        dependsOn(reobfJar)
     }
 }
 
-application {
-    mainClass.set("ChronosPlugin")
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    dependsOn(tasks.named("build"))
 }
