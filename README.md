@@ -1,3 +1,3 @@
 # Chronos Plugin
 
-A plugin that makes the passing of time more accurate.
+A plugin to make the flow of time in your Minecraft worlds a bit more accurate.

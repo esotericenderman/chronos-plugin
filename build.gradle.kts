@@ -12,7 +12,7 @@ plugins {
     id("io.github.goooler.shadow") version "8.1.8"
 }
 
-description = "A plugin that makes the passing of time more accurate."
+description = " A plugin to make the flow of time in your Minecraft worlds a bit more accurate."
 
 group = "dev.enderman"
 version = "0.0.1"
