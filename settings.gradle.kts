@@ -1,1 +1,1 @@
-rootProject.name = "chronos"
+rootProject.name = "chronos-plugin"
